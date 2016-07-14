@@ -59,6 +59,8 @@ module.exports = {
 
 		if (!search) return;
 
+		search = search.toLowerCase();
+
 		// get user's id
 		var userId = req.token.id;
 
