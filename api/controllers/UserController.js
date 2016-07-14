@@ -69,7 +69,12 @@ module.exports = {
 				console.log('User.findOne ' + err);
 				return res.json(500, {err: err});
 			}
-			console.log(user);
+
+			if (!user){
+				console.log('No user found!');
+				return res.json(400, {err: 'No user found'});
+			}
+
 			// searchKey already existed before
 			if (user.searches.indexOf(search) != -1){
 				console.log('indexOf');
