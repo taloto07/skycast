@@ -69,7 +69,7 @@ module.exports = {
 				console.log('User.findOne ' + err);
 				return res.json(500, {err: err});
 			}
-
+			console.log(user);
 			// searchKey already existed before
 			if (user.searches.indexOf(search) != -1){
 				console.log('indexOf');
