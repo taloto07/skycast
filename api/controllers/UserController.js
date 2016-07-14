@@ -96,13 +96,13 @@ module.exports = {
 		var lng = req.param('lng');
 		var latLng = lat + ',' + lng;
 		var url = 'https://api.forecast.io/forecast/8e000d8bd0b4c22a097745008c8f9ee9/' + latLng;
-		
+		console.log(lat);
+		console.log(lng);
 		request(url, function(error, response, body){
-			console.log(error);
-			console.log(response);
-			console.log(body);
-			console.log(lat);
-			console.log(lng);
+			// console.log(error);
+			// console.log(response);
+			// console.log(body);
+			
 			if (!error && response.statusCode == 200)
 				return res.json(200, {skycast: JSON.parse(body)});
 
