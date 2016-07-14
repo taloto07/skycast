@@ -1,0 +1,49 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <h1>Hello, Sky Cast!</h1>
+    
+    <div id="d3_chart" class="col-md-6"></div>
+    <div class="col-md-6" ng-show="chart">
+    	<div class="media">
+		  <div class="media-left media-top">
+		    <a href="#">
+		      <div style="width:25px;height:15px;display:block" class="bg-primary"></div>
+		    </a>
+		  </div>
+		  <div class="media-body">
+		    <h5 class="media-heading">Maximum Temperature</h5>
+		  </div>
+		</div>
+		<div class="media">
+		  <div class="media-left media-top">
+		    <a href="#">
+		      <div style="width:25px;height:15px;display:block; background-color:orange"></div>
+		    </a>
+		  </div>
+		  <div class="media-body">
+		    <h5 class="media-heading">Mininum Temperature</h5>
+		  </div>
+		</div>
+    </div>
+    
+  </div>
+</div>
+
+<!-- <div class="container" id="d3_chart">
+hi      
+</div> -->
+
+<div class="container" ng-show="user">
+	<div class="panel panel-default">
+	  <div class="panel-heading">Search History:</div>
+	  <div class="panel-body">
+	    <div class="row">
+            <div class="col-sm-4" ng-repeat="history in user.searches" style="margin-bottom: 5px">
+                <a href="#" ng-click="search(history)"><small ng-bind="history"></small></a>
+            </div>
+        </div>
+	  </div>
+	</div>
+</div>
+
