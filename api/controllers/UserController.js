@@ -60,15 +60,19 @@ module.exports = {
 		if (!search) return;
 
 		search = search.toLowerCase();
-
+		console.log(search);
 		// get user's id
 		var userId = req.token.id;
 
 		User.findOne(userId, function(err, user){
-			if (err) return res.json(500, {err: err});
+			if (err) {
+				console.log('User.findOne ' + err);
+				return res.json(500, {err: err});
+			}
 
 			// searchKey already existed before
 			if (user.searches.indexOf(search) != -1){
+				console.log('indexOf');
 				return res.json(202, {});
 			}
 
@@ -77,7 +81,10 @@ module.exports = {
 
 			User.update(userId, {searches: user.searches})
 			.exec(function(err, updated){
-				if (err) return res.json(500, {err: err});
+				if (err) {
+					console.log('User.update ' + err);
+					return res.json(500, {err: err});
+				}
 				
 				return res.json(201, {user: user});
 			});
