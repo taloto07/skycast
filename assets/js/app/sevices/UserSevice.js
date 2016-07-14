@@ -137,11 +137,11 @@ angular.module('skycast')
 					
 					var lat = latLng.lat();
 					var lng = latLng.lng();
-					console.log(latLng);
+					
 					return self.getForecast(lat, lng);
 
 				}).then(function(result){
-					console.log(result);
+					
 					deferred.resolve(result);
 					
 					// add address to user's history in database

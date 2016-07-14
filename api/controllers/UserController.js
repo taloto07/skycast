@@ -60,24 +60,21 @@ module.exports = {
 		if (!search) return;
 
 		search = search.toLowerCase();
-		console.log(search);
+		
 		// get user's id
 		var userId = req.token.id;
 
 		User.findOne(userId, function(err, user){
 			if (err) {
-				console.log('User.findOne ' + err);
 				return res.json(500, {err: err});
 			}
 
 			if (!user){
-				console.log('No user found!');
 				return res.json(400, {err: 'No user found'});
 			}
 
 			// searchKey already existed before
 			if (user.searches.indexOf(search) != -1){
-				console.log('indexOf');
 				return res.json(202, {});
 			}
 
@@ -101,13 +98,8 @@ module.exports = {
 		var lng = req.param('lng');
 		var latLng = lat + ',' + lng;
 		var url = 'https://api.forecast.io/forecast/8e000d8bd0b4c22a097745008c8f9ee9/' + latLng;
-		console.log(lat);
-		console.log(lng);
+		
 		request(url, function(error, response, body){
-			// console.log(error);
-			// console.log(response);
-			// console.log(body);
-			
 			if (!error && response.statusCode == 200)
 				return res.json(200, {skycast: JSON.parse(body)});
 
