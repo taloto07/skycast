@@ -131,9 +131,6 @@ angular.module('skycast')
 
 			getWeather: function(address){
 
-				// add address to user's history in database
-				this.addSearch(address);
-
 				var deferred = $q.defer();
 				var self = this;
 				this.getLatLng(address).then(function(latLng){
@@ -146,7 +143,10 @@ angular.module('skycast')
 				}).then(function(result){
 					console.log(result);
 					deferred.resolve(result);
-
+					
+					// add address to user's history in database
+					self.addSearch(address);
+					
 					$rootScope.$broadcast('skycast', result);
 
 				}).catch(function(err){

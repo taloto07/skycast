@@ -42,7 +42,7 @@ skycast = angular.module('skycast')
 
 		$rootScope.search = function(address){
 			if (!address) return;
-			var address = address.toLowerCase();
+			// var address = address.toLowerCase();
 			UserService.getWeather(address).then(function(result){
 				$scope.searchKey = address;
 				$rootScope.chart = true;
@@ -50,7 +50,7 @@ skycast = angular.module('skycast')
 
 			}, function(err){
 				
-				alert('Something went wrong: ' + err);
+				alert('Something went wrong: ' + JSON.stringify(err) );
 
 			});
 		}
