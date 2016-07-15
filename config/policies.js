@@ -26,12 +26,9 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': ['jwtAuth'],
+  '*': true,
 
   'user': {
-    'create': true,
-    'login': true,
-    'skycast': true,
     'history': ['jwtAuth']
   }
 

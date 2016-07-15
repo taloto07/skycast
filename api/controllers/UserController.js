@@ -57,7 +57,7 @@ module.exports = {
 	history: function(req, res){
 		var search = req.param('searchKey');
 
-		if (!search) return;
+		if (!search) return res.json(400, {});
 
 		search = search.toLowerCase();
 		
