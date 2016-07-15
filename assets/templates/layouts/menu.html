@@ -12,13 +12,13 @@
         <div id="navbar" class="navbar-collapse collapse">
 
             <ul class="nav navbar-nav navbar-right" ng-show="!user">
-                <li><a href="" ng-click="login()">Log in</a></li>
-                <li><a href="" ng-click="signup()">Sign up</a></li>
+                <li><a href="#" ng-click="login()">Log in</a></li>
+                <li><a href="#" ng-click="signup()">Sign up</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right" ng-show="user">
                 <li><a ng-bind="user.username | uppercase">?</a></li>
-                <li><a ng-click="logout()">Log out</a></li>
+                <li><a href="#" ng-click="logout()">Log out</a></li>
             </ul>
 
             <form class="navbar-form">
