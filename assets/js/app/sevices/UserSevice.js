@@ -144,11 +144,8 @@ angular.module('skycast')
 					
 					deferred.resolve(result);
 					
-					// add address to user's history in database
-					
-					$rootScope.$broadcast('history');
-					
 					$rootScope.$broadcast('skycast', result);
+					$rootScope.$broadcast('searchKey', address);
 
 				}).catch(function(err){
 

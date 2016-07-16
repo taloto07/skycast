@@ -9,6 +9,10 @@ skycast = angular.module('skycast')
 			$rootScope.user = UserService.getUser();
 		}
 
+		$scope.$on('searchKey', function(event, searchKey){
+			$scope.searchKey = searchKey;
+		});
+
 		$scope.login = function(){
 			var modalInstance = $uibModal.open({
 				animation: true,
@@ -40,14 +44,16 @@ skycast = angular.module('skycast')
 			$rootScope.user = null;
 		};
 
-		$rootScope.search = function(address){
+		$scope.search = function(){
+			var address = document.getElementById('autocomplete').value;
+			
 			if (!address) return;
 			
 			UserService.getWeather(address).then(function(result){
-				$scope.searchKey = address;
 				$rootScope.chart = true;
 				$rootScope.skycast = result.data.skycast;
-
+				// add address to user's history in database
+				UserService.addSearch(address);
 			}, function(err){
 				
 				alert('Something went wrong: ' + JSON.stringify(err) );
@@ -55,18 +61,16 @@ skycast = angular.module('skycast')
 			});
 		}
 
-		$scope.$on('history', function(){
-			console.log('add history');
-			var search = document.getElementById('autocomplete').value;
-			UserService.addSearch(search);
-		});
-
 		var autoComplete;
 		var initAutocomplete = function(){
 			autoComplete = new google.maps.places.Autocomplete(
 				(document.getElementById('autocomplete')),
 				{type: ['geocode']}
 			);
+
+			autoComplete.addListener('place_changed', function(){
+				$scope.search();
+			})
 		};
 
 		initAutocomplete();				

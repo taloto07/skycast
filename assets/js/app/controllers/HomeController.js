@@ -1,8 +1,8 @@
 skycast = angular.module('skycast')
 
 .controller('HomeController', [
-	'$scope', '$rootScope',
-	function($scope, $rootScope){
+	'$scope', '$rootScope', 'UserService',
+	function($scope, $rootScope, UserService){
 
 		$scope.$on('skycast', function(env, skycast){
 			weatherGraph(skycast.data.skycast);
@@ -77,6 +77,22 @@ skycast = angular.module('skycast')
 		var getDate = function(time){
 			var date = new Date(time * 1000);
 			return date.getMonth() + 1 + '/' + date.getDate();
+		}
+
+		$scope.search = function(address){
+			
+			if (!address) return;
+			
+			UserService.getWeather(address).then(function(result){
+				
+				$rootScope.chart = true;
+				$rootScope.skycast = result.data.skycast;
+
+			}, function(err){
+				
+				alert('Something went wrong: ' + JSON.stringify(err) );
+
+			});
 		}
 	}
 ]);
