@@ -54,5 +54,15 @@ skycast = angular.module('skycast')
 
 			});
 		}
+
+		var autoComplet;
+		var initAutocomplete = function(){
+			autoComplet = new google.maps.places.Autocomplete(
+				(document.getElementById('autocomplete')),
+				{type: ['geocode']}
+			);
+		};
+
+		initAutocomplete();		
 	}
 ]);
