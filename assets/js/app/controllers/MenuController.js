@@ -55,14 +55,18 @@ skycast = angular.module('skycast')
 			});
 		}
 
-		var autoComplet;
-		var initAutocomplete = function(){
-			autoComplet = new google.maps.places.Autocomplete(
-				(document.getElementById('autocomplete')),
-				{type: ['geocode']}
-			);
-		};
+		// var autoComplete;
+		// var initAutocomplete = function(){
+		// 	autoComplete = new google.maps.places.Autocomplete(
+		// 		(document.getElementById('autocomplete')),
+		// 		{type: ['geocode']}
+		// 	);
 
-		initAutocomplete();		
+		// 	autoComplete.addListener('place_changed', function(){
+		// 		$scope.searchKey = document.getElementById('autocomplete').value;
+		// 	});
+		// };
+
+		// initAutocomplete();		
 	}
 ]);
