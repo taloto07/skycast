@@ -57,7 +57,6 @@ skycast = angular.module('skycast')
 
 		var autoComplet;
 		var initAutocomplete = function(){
-			console.log('autocomplete');
 			autoComplet = new google.maps.places.Autocomplete(
 				(document.getElementById('autocomplete')),
 				{type: ['geocode']}
