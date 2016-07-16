@@ -42,7 +42,7 @@ skycast = angular.module('skycast')
 
 		$rootScope.search = function(address){
 			if (!address) return;
-			// var address = address.toLowerCase();
+			
 			UserService.getWeather(address).then(function(result){
 				$scope.searchKey = address;
 				$rootScope.chart = true;
@@ -55,18 +55,20 @@ skycast = angular.module('skycast')
 			});
 		}
 
-		// var autoComplete;
-		// var initAutocomplete = function(){
-		// 	autoComplete = new google.maps.places.Autocomplete(
-		// 		(document.getElementById('autocomplete')),
-		// 		{type: ['geocode']}
-		// 	);
+		$scope.$on('history', function(){
+			console.log('add history');
+			var search = document.getElementById('autocomplete').value;
+			UserService.addSearch(search);
+		});
 
-		// 	autoComplete.addListener('place_changed', function(){
-		// 		$scope.searchKey = document.getElementById('autocomplete').value;
-		// 	});
-		// };
+		var autoComplete;
+		var initAutocomplete = function(){
+			autoComplete = new google.maps.places.Autocomplete(
+				(document.getElementById('autocomplete')),
+				{type: ['geocode']}
+			);
+		};
 
-		// initAutocomplete();		
+		initAutocomplete();				
 	}
 ]);
