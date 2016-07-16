@@ -8,6 +8,20 @@
 var request = require('request');
 
 module.exports = {
+	/*
+    |--------------------------------------------------------------------------
+    | Create user account
+    |--------------------------------------------------------------------------
+    | @parameter: - username, password, and confirmPassword
+    | @required : - username, password, and confirmPassword are not empty.
+    |			  - password == confirmPassword.
+    |			  - username does not exist yet.
+    | @modified : - User model
+    | @effect   : - new user created with encrypted password
+    | @return   : - 201 with user object and token if success, 
+    |				otherwise 401 if password or confirmPassword does not match or
+    |				empty
+    */
 	create: function(req, res, next){
 		var password = req.param('password');
 		var confirmPassword = req.param('confirmPassword');
@@ -26,6 +40,18 @@ module.exports = {
 		});
 	},
 
+	/*
+    |--------------------------------------------------------------------------
+    | Log in
+    |--------------------------------------------------------------------------
+    | @parameter: - username and password
+    | @required : - username and password are not empty.
+    | @modified : 
+    | @effect   : 
+    | @return   : - 200 with user object and token if success, 
+    |				otherwise 401 if username or password is empty and can't find
+    |				username, or 403 password doesn't match user's password
+    */
 	login: function(req, res, next){
 		var username = req.param('username');
 		var password = req.param('password');
@@ -54,11 +80,25 @@ module.exports = {
 		});
 	},
 
+	/*
+    |--------------------------------------------------------------------------
+    | Insert search to user's seaches
+    |--------------------------------------------------------------------------
+    | @parameter: - searchKey
+    | @required : - searchKey is not empty.
+    | @modified : - User model
+    | @effect   : - add searchKey to user's searches if doesn't already exist
+    | @return   : - 201 with user object if success, 
+    |				otherwise 400 if searchKey is empty,
+    |				400 if no user found,
+    |				202 if searchKey is already existed
+    */
 	history: function(req, res){
 		var search = req.param('searchKey');
 
 		if (!search) return res.json(400, {});
 
+		// convert search to lower case
 		search = search.toLowerCase();
 		
 		// get user's id
@@ -93,6 +133,16 @@ module.exports = {
 		});
 	},
 
+	/*
+    |--------------------------------------------------------------------------
+    | Get weather from forecast.io
+    |--------------------------------------------------------------------------
+    | @parameter: - lat, lng
+    | @required : - lat and lng are complied with latitude and longitude standar
+    | @modified : 
+    | @effect   : 
+    | @return   : - 200 with json weather, otherwise statuscode and error from forecast.io
+    */
 	skycast: function(req, res){
 		var lat = req.param('lat');
 		var lng = req.param('lng');

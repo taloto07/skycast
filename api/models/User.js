@@ -28,6 +28,16 @@ module.exports = {
   			defaultsTo: []
   		},
 
+      /*
+      |--------------------------------------------------------------------------
+      | Modifies return object
+      |--------------------------------------------------------------------------
+      | @parameter: 
+      | @required : 
+      | @modified : 
+      | @effect   : 
+      | @return   : user boject without password field
+      */
   		toJSON: function(){
   			var obj = this.toObject();
   			delete obj.encryptedPassword;
@@ -35,6 +45,16 @@ module.exports = {
   		},	
   	},
 
+    /*
+    |--------------------------------------------------------------------------
+    | Engrypt password before create user
+    |--------------------------------------------------------------------------
+    | @parameter: password
+    | @required : password is not empty
+    | @modified : encryptedPassword
+    | @effect   : encrypt password and assign to encryptedPassword
+    | @return   : 
+    */
   	beforeCreate: function(values, next){
   		bcrypt.genSalt(10, function(err, salt){
   			if (err) next(err);
@@ -51,6 +71,17 @@ module.exports = {
   		});
   	},
 
+    /*
+    |--------------------------------------------------------------------------
+    | Compare password
+    |--------------------------------------------------------------------------
+    | @parameter: - password, user, callback
+    | @required : - password, user, and cb are not empty
+    |             - cb is a function
+    | @modified : 
+    | @effect   : call cb with null and true if success otherwise with err onlu
+    | @return   : 
+    */
   	comparePassword: function(password, user, cb){
   		bcrypt.compare(password, user.encryptedPassword, function(err, match){
   			if (err) cb(err);
